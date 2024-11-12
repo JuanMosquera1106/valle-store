@@ -1,6 +1,6 @@
 import { Tipo } from '@/types';
 
-const URL = `http://localhost:3000/api/tipo`; // Reemplaza con la URL exacta de tu API
+const URL = `${process.env.NEXT_PUBLIC_API_URL}/tipo`; // Reemplaza con la URL exacta de tu API
 
 const getTipos = async (): Promise<Tipo[]> => {
     try {
