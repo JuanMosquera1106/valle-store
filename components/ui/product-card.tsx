@@ -2,6 +2,8 @@
 
 import { Producto } from "@/types";
 import IconButton from "@/components/ui/icon-button";
+import Currency from "@/components/ui/currency";
+import { useRouter } from "next/navigation";
 
 import Image from "next/image";
 import { Expand, ShoppingCart } from "lucide-react";
@@ -9,13 +11,22 @@ import { Expand, ShoppingCart } from "lucide-react";
 
 interface ProductCard {
     data: Producto;
+    
 }
 
 const ProductCard: React.FC<ProductCard> = ({
     data
+    
 }) => {
+    const router = useRouter();
+
+    const handleClick = () => {
+        router.push(`/producto/${data.prdid}`);
+    }
+
     return (
-        <div className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
+
+        <div onClick={handleClick} className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
             {/* Images and Actions */}
             <div className="aspect-square rounded-xl bg-gray-100 relative">
                 {data.prdfoto ? (
@@ -49,9 +60,14 @@ const ProductCard: React.FC<ProductCard> = ({
                     {data.prdnombre}
                 </p>
                 <p className="text-sm text-gray-500">
+
                     {data.tipo?.tipnombre}
                 </p>
             </div>
+            {/*Precio*/}
+            <div className="flex items-center justify-between">
+                <Currency value={data?.prdprecio}/>
+            </div>	    
         </div>
     );
 }

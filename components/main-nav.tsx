@@ -10,8 +10,6 @@ interface MainNavProps {
 const MainNav: React.FC<MainNavProps> = ({ data }) => {
     const pathname = usePathname();
 
-    console.log("Datos en MainNav:", data); // Verifica que `data` tenga los datos correctos
-
     const routes = data.map((route) => ({
         href: `/Tipo/${route.tipid}`,
         label: route.tipnombre,

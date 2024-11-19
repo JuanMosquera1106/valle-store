@@ -12,9 +12,6 @@ const getTipos = async (): Promise<Tipo[]> => {
 
         const data = await res.json();
 
-        // Agrega un console.log para ver la estructura de data
-        console.log("Datos obtenidos:", data);
-
         // Verifica si data es un array y tiene la estructura correcta
         if (!Array.isArray(data)) {
             throw new Error("La respuesta de la API no es un array");
