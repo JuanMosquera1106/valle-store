@@ -19,20 +19,44 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
     active: pathname === `/tipo/${route.tipid}`,
   }));
 
+  // Manejo del cambio en la lista desplegable
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedHref = event.target.value;
+    if (selectedHref) {
+      window.location.href = selectedHref;
+    }
+  };
+
   return (
     <nav className="mx-6 flex items-center space-x-4 lg:space-x-6">
-      {routes.map((route) => (
-        <Link
-          key={route.href}
-          href={route.href}
-          className={cn(
-            "text-sm font-medium transition-colors hover:text-primary",
-            route.active ? "text-black font-bold underline" : "text-gray-500"
-          )}
+      {/* Menú desplegable para Tipos */}
+      <div className="relative">
+        <select
+          onChange={handleSelectChange}
+          className="border rounded-lg p-2 text-sm transition-colors hover:border-primary focus:outline-none focus:ring focus:ring-primary-light"
+          value={routes.find((route) => route.active)?.href || ""}
         >
-          {route.label}
-        </Link>
-      ))}
+          <option value="" disabled>
+            Tipos
+          </option>
+          {routes.map((route) => (
+            <option key={route.href} value={route.href}>
+              {route.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Enlace adicional a "Productores" */}
+      <Link
+        href="/productor"
+        className={cn(
+          "text-sm font-medium transition-colors hover:text-primary",
+          pathname === "/productores" ? "text-black font-bold underline" : "text-gray-500"
+        )}
+      >
+        Productores
+      </Link>
     </nav>
   );
 };

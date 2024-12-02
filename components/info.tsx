@@ -4,12 +4,23 @@ import { Producto } from "@/types";
 import Currency from "@/components/ui/currency";
 import Button from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
+import useCartStore from "@/store/useCartStore"; // Importación corregida
 
 interface InfoProps {
   data: Producto;
 }
 
+
 const Info: React.FC<InfoProps> = ({ data }) => {
+
+  const addToCart = useCartStore((state) => state.addToCart);
+
+const handleAddToCartClick = (e: React.MouseEvent) => {
+  e.stopPropagation(); // Prevenir navegación al hacer clic en el carrito
+  addToCart(data); // Agregar producto al carrito
+};
+
+
   return (
     <div>
       {/* Nombre del producto */}
@@ -42,7 +53,7 @@ const Info: React.FC<InfoProps> = ({ data }) => {
           
         {/* Botón de compra */}
         <div className="mt-6">
-            <Button className="flex items-center gap-x-2">
+            <Button onClick={handleAddToCartClick} className="flex items-center gap-x-2">
                 Agregar al carrito
                 <ShoppingCart />
             </Button>

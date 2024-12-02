@@ -1,13 +1,13 @@
-import { Producto } from '@/types';
+import { Productor } from '@/types';
 import NoResults from '@/components/ui/no-results';
-import ProductCard from '@/components/ui/product-card';
+import ProductorCard from '@/components/ui/productor-card';
 
-interface ProductListProps {
+interface ProductorListProps {
     title: string;
-    items: Producto[] | null | undefined; // Acepta `null` o `undefined` también
+    items: Productor[] | null | undefined; // Acepta `null` o `undefined` también
 }
 
-const ProductList: React.FC<ProductListProps> = ({
+const ProductorList: React.FC<ProductorListProps> = ({
     title,
     items
 }) => {
@@ -18,7 +18,7 @@ const ProductList: React.FC<ProductListProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {items && items.length > 0 ? (
                     items.map((item) => (
-                        <ProductCard key={item.prdid} data={item} /> // Pasar el objeto completo `item`
+                        <ProductorCard key={item.proid} data={item} /> // Pasar el objeto completo `item`
                     ))
                 ) : (
                     <NoResults /> // Alternativa en caso de que `items` sea `null` o vacío
@@ -29,4 +29,4 @@ const ProductList: React.FC<ProductListProps> = ({
     );
 };
 
-export default ProductList;
+export default ProductorList;
