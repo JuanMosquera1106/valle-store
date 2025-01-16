@@ -1,9 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Ensure Tailwind CSS is installed and configured correctly */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 html, 
 body, 
 :root {
   height: 100%;
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('/app/fonts/MyriadPro-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }

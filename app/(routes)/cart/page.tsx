@@ -22,7 +22,7 @@ const CartPage = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Carrito</h1>
+      <h1 className="text-2xl font-bold mb-6 text-greenValle">Carrito</h1>
 
       {items.length === 0 ? (
         <p className="text-gray-500">Tu carrito está vacío.</p>
@@ -52,21 +52,21 @@ const CartPage = () => {
                   {/* Botones para cantidad */}
                   <button
                     onClick={() =>
-                      updateQuantity(item.product.prdid, item.quantity - 1)
+                      updateQuantity(item.product.prdid, item.quantity + 1)
                     }
-                    disabled={item.quantity === 1}
-                    className="px-3 py-1 border rounded-md bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                    className="px-3 py-1 border rounded-md bg-greenButtonValle hover:bg-gray-300"
                   >
-                    -
+                    +
                   </button>
                   <span className="font-medium">{item.quantity}</span>
                   <button
                     onClick={() =>
-                      updateQuantity(item.product.prdid, item.quantity + 1)
+                      updateQuantity(item.product.prdid, item.quantity - 1)
                     }
-                    className="px-3 py-1 border rounded-md bg-gray-200 hover:bg-gray-300"
+                    disabled={item.quantity === 1}
+                    className="px-3 py-1 border rounded-md bg-greenButtonValle hover:bg-gray-300 disabled:opacity-50"
                   >
-                    +
+                    -
                   </button>
                 </div>
                 <Button

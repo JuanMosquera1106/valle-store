@@ -28,16 +28,50 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
   };
 
   return (
-    <nav className="mx-6 flex items-center space-x-4 lg:space-x-6">
-      {/* Menú desplegable para Tipos */}
+    <nav className="mr-5 flex items-center space-x-4 lg:space-x-6 justify-end w-full">
+
+            {/* Enlace adicional a "Inicio" */}
+      <Link
+          href="/inicio"
+          className={cn(
+            "text-sm font-medium transition-colors hover:text-primary",
+            pathname === "/inicio" ? "text-black font-bold underline" : "text-greenValle"
+          )}
+      >
+          Inicio
+      </Link>
+
+      {/* Enlace adicional a "Comunidad" */}
+      <Link
+        href="/productor"
+        className={cn(
+          "text-sm font-medium transition-colors hover:text-primary",
+          pathname === "/productores" ? "text-greenValle font-bold underline" : "text-greenValle"
+        )}
+      >
+        Comunidad
+      </Link>
+
+      {/* Enlace adicional a "Nosotros" */}
+      <Link
+        href="/info"
+        className={cn(
+          "text-sm font-medium transition-colors hover:text-primary",
+          pathname === "/info" ? "text-greenValle font-bold underline" : "text-greenValle"
+        )}
+      >
+        Nosotros
+      </Link>
+
+      {/* Menú desplegable para Tienda por Tipos */}
       <div className="relative">
         <select
           onChange={handleSelectChange}
-          className="border rounded-lg p-2 text-sm transition-colors hover:border-primary focus:outline-none focus:ring focus:ring-primary-light"
+          className="border rounded-lg p-2 text-sm transition-colors hover:border-primary focus:outline-none focus:ring focus:ring-primary-light text-greenValle"
           value={routes.find((route) => route.active)?.href || ""}
         >
           <option value="" disabled>
-            Tipos
+            Tienda
           </option>
           {routes.map((route) => (
             <option key={route.href} value={route.href}>
@@ -47,16 +81,6 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
         </select>
       </div>
 
-      {/* Enlace adicional a "Productores" */}
-      <Link
-        href="/productor"
-        className={cn(
-          "text-sm font-medium transition-colors hover:text-primary",
-          pathname === "/productores" ? "text-black font-bold underline" : "text-gray-500"
-        )}
-      >
-        Productores
-      </Link>
     </nav>
   );
 };

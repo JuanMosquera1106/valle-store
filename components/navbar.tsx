@@ -9,17 +9,16 @@ const Navbar = async () => {
     const tipos = await getTipos();
 
     return (
-        <div className="border-b">
+        <div>
             <Container>
                 <div className="relative px-4 sm:px-6 lg:px/-8 flex h-16 items-center">
-                    <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
-                        <p className="font-bold text-xl"> Tienda</p>
-                    </Link>
                     <MainNav data={tipos}/>
                     <NavbarActions/>
                 </div>
             </Container> 
+            <div className="mx-auto h-2 w-11/12 bg-brownValle rounded-full"/>
         </div>
+
     ) 
 }
 
