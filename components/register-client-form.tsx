@@ -61,44 +61,50 @@ const RegisterClientForm: React.FC<RegisterClientFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-2 w-80 justify-start">
+      <h1 className="font-bold text-[24px]">
+      Datos del cliente</h1>
       <input
         type="text"
         name="clinombre"
         placeholder="Nombre"
         value={formData.clinombre}
         onChange={handleChange}
-        className="w-full p-2 border rounded-md"
+        className="w-full p-2 border rounded-md bg-grayValle"
         required
       />
+      <br/>
       <input
         type="email"
         name="clicorreo"
         placeholder="Correo"
         value={formData.clicorreo}
         onChange={handleChange}
-        className="w-full p-2 border rounded-md"
+        className="w-full p-2 border rounded-md bg-grayValle"
         required
       />
+      <br/>
       <input
         type="text"
         name="clitelefono"
         placeholder="Teléfono (opcional)"
         value={formData.clitelefono}
         onChange={handleChange}
-        className="w-full p-2 border rounded-md"
+        className="w-full p-2 border rounded-md bg-grayValle"
       />
+      <br/>
       <input
         type="text"
         name="clici"
         placeholder="Cédula o Identificación (opcional)"
         value={formData.clici}
         onChange={handleChange}
-        className="w-full p-2 border rounded-md"
+        className="w-full p-2 border rounded-md bg-grayValle"
       />
+      <br/>
       <button
         type="submit"
-        className="w-full bg-black text-white py-2 rounded-md"
+        className="w-full bg-yellowButtonValle text-white py-2 rounded-md"
       >
         {initialData ? "Actualizar Cliente" : "Registrar Cliente"}
       </button>

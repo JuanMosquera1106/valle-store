@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { Producto } from '@/types';
+import { create } from "zustand";
+import { Producto } from "@/types";
 
 interface CartItem {
   product: Producto;
@@ -8,7 +8,7 @@ interface CartItem {
 
 interface CartState {
   items: CartItem[];
-  totalQuantity: number; // Nueva propiedad derivada
+  totalQuantity: number; // Propiedad reactiva
   addToCart: (product: Producto, quantity?: number) => void;
   removeFromCart: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
@@ -17,25 +17,23 @@ interface CartState {
 
 // Función para sincronizar con localStorage
 const persistCart = (items: CartItem[]) => {
-  localStorage.setItem('cart', JSON.stringify(items));
+  localStorage.setItem("cart", JSON.stringify(items));
 };
 
 const loadCart = (): CartItem[] => {
-  const storedCart = localStorage.getItem('cart');
+  const storedCart = localStorage.getItem("cart");
   return storedCart ? JSON.parse(storedCart) : [];
 };
 
-const useCartStore = create<CartState>((set, get) => ({
+const useCartStore = create<CartState>((set) => ({
   items: loadCart(),
-
-  // Nueva propiedad derivada para la cantidad total
-  get totalQuantity() {
-    return get().items.reduce((total, item) => total + item.quantity, 0);
-  },
+  totalQuantity: 0, // Inicializa la cantidad total
 
   addToCart: (product, quantity = 1) => {
     set((state) => {
-      const existingItem = state.items.find((item) => item.product.prdid === product.prdid);
+      const existingItem = state.items.find(
+        (item) => item.product.prdid === product.prdid
+      );
 
       const updatedItems = existingItem
         ? state.items.map((item) =>
@@ -46,15 +44,31 @@ const useCartStore = create<CartState>((set, get) => ({
         : [...state.items, { product, quantity }];
 
       persistCart(updatedItems);
-      return { items: updatedItems };
+
+      return {
+        items: updatedItems,
+        totalQuantity: updatedItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        ), // Recalcular totalQuantity
+      };
     });
   },
 
   removeFromCart: (id) => {
     set((state) => {
-      const updatedItems = state.items.filter((item) => item.product.prdid !== id);
+      const updatedItems = state.items.filter(
+        (item) => item.product.prdid !== id
+      );
       persistCart(updatedItems);
-      return { items: updatedItems };
+
+      return {
+        items: updatedItems,
+        totalQuantity: updatedItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        ), // Recalcular totalQuantity
+      };
     });
   },
 
@@ -67,14 +81,21 @@ const useCartStore = create<CartState>((set, get) => ({
       );
 
       persistCart(updatedItems);
-      return { items: updatedItems };
+
+      return {
+        items: updatedItems,
+        totalQuantity: updatedItems.reduce(
+          (total, item) => total + item.quantity,
+          0
+        ), // Recalcular totalQuantity
+      };
     });
   },
 
   clearCart: () => {
     set(() => {
       persistCart([]);
-      return { items: [] };
+      return { items: [], totalQuantity: 0 }; // Resetear totalQuantity
     });
   },
 }));

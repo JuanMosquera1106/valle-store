@@ -16,7 +16,7 @@ const Navbar = async () => {
                     <NavbarActions/>
                 </div>
             </Container> 
-            <div className="mx-auto h-2 w-11/12 bg-brownValle rounded-full"/>
+            <div className="h-2 w-12/12 bg-brownValle rounded-full mr-10 ml-10 sm: mr-2 ml-2"/>
         </div>
 
     ) 

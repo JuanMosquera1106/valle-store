@@ -7,19 +7,37 @@ import { createOrder } from "@/actions/get-pedido";
 import ClientCard from "@/components/ui/cliente-card";
 import RegisterClientForm from "@/components/register-client-form";
 import useCartStore from "@/store/useCartStore";
-import Currency from "@/components/ui/currency";
 import Button from "@/components/ui/button";
+import CartItem from "@/components/cart-item";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 const TransferPage = () => {
-  const { items, clearCart } = useCartStore();
+  const router = useRouter();
+  const {
+    items,
+    updateQuantity: updateQuantityNumber,
+    removeFromCart: removeFromCartNumber,
+  } = useCartStore();
+
+  const updateQuantity = (id: string, quantity: number) => {
+    updateQuantityNumber(Number(id), quantity);
+  };
+
+  const removeFromCart = (id: string) => {
+    removeFromCartNumber(Number(id));
+  };
+
   const [client, setClient] = useState<Cliente | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [orderId, setOrderId] = useState<number | null>(null);
 
-  const total = items.reduce((sum, item) => sum + item.product.prdprecio * item.quantity, 0);
+  const total = items.reduce(
+    (sum, item) => sum + item.product.prdprecio * item.quantity,
+    0
+  );
 
-  // Cargar datos del cliente desde localStorage
   useEffect(() => {
     const savedClient = localStorage.getItem("client");
     if (savedClient) {
@@ -31,7 +49,6 @@ const TransferPage = () => {
     localStorage.setItem("client", JSON.stringify(client));
   };
 
-  // Manejar registro o actualización del cliente
   const handleRegisterOrUpdateClient = async (data: {
     clinombre: string;
     clicorreo: string;
@@ -42,15 +59,13 @@ const TransferPage = () => {
       let updatedClient: Cliente | null = null;
 
       if (client) {
-        // Si el cliente ya existe, actualizarlo
         updatedClient = await updateClient(client.clid, {
           clinombre: data.clinombre,
           clicorreo: data.clicorreo,
-          clitelefono: data.clitelefono || "", // Convertir undefined a string vacío
-          clici: data.clici || "", // Convertir undefined a string vacío
+          clitelefono: data.clitelefono || "",
+          clici: data.clici || "",
         });
       } else {
-        // Si no hay cliente en el estado, registrarlo
         updatedClient = await registerClient({
           clinombre: data.clinombre,
           clicorreo: data.clicorreo,
@@ -63,17 +78,19 @@ const TransferPage = () => {
         setClient(updatedClient);
         saveClientToLocalStorage(updatedClient);
         setIsEditing(false);
+        toast.success("Cliente registrado o actualizado con éxito.");
       } else {
-        alert("No se pudo procesar la solicitud.");
+        toast.error("No se pudo procesar la solicitud.");
       }
     } catch (error) {
       console.error("Error al registrar o actualizar el cliente:", error);
+      toast.error("Hubo un error al procesar los datos del cliente.");
     }
   };
 
   const handlePlaceOrder = async () => {
     if (!client) {
-      alert("Registra o actualiza tus datos primero.");
+      toast.error("Registra o actualiza tus datos primero.");
       return;
     }
 
@@ -91,52 +108,76 @@ const TransferPage = () => {
     if (pedido) {
       setOrderId(pedido.peid);
       setIsOrderPlaced(true);
-      clearCart();
+      toast.success("Pedido confirmado con éxito.");
     } else {
-      alert("Hubo un error al procesar el pedido.");
+      toast.error("Hubo un error al procesar el pedido.");
     }
+  };
+
+  const handleCancelOrder = () => {
+    router.push("/cart"); // Redirige al usuario a la página del carrito
   };
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Pago por Transferencia Bancaria</h1>
+      <h1 className="text-2xl font-bold mb-6 text-greenValle">
+        Pago por Transferencia Bancaria
+      </h1>
       {isEditing || !client ? (
         <RegisterClientForm
           initialData={client || undefined}
-          onSubmit={handleRegisterOrUpdateClient} // Manejar datos correctamente
+          onSubmit={handleRegisterOrUpdateClient}
         />
       ) : (
         <ClientCard clientData={client} onEdit={() => setIsEditing(true)} />
       )}
       <div className="mt-6 space-y-6">
-        <div className="bg-gray-100 p-6 rounded-lg">
+        <div className="bg-greenButtonValle p-6 rounded-lg">
           <h2 className="text-lg font-semibold">Instrucciones para Transferencia</h2>
-          <p>Banco: Banco Ejemplo</p>
-          <p>Cuenta: 123456789</p>
-          <p>Referencia: Número de Pedido: {orderId || "pendiente"}</p>
+          <p>
+            <span className="font-semibold">Banco:</span> Banco Ejemplo
+          </p>
+          <p>
+            <span className="font-semibold">Cuenta:</span> 123456789
+          </p>
+          <p>
+            <span className="font-semibold">Referencia:</span> Número de Pedido:{" "}
+            {orderId || "pendiente"}
+          </p>
         </div>
-        <div>
+
+        <div className="space-y-4">
           {items.map((item) => (
-            <div key={item.product.prdid} className="flex justify-between items-center">
-              <div>
-                <h3>{item.product.prdnombre}</h3>
-                <p>Cantidad: {item.quantity}</p>
-              </div>
-              <Currency value={item.product.prdprecio * item.quantity} />
-            </div>
+            <CartItem
+              key={item.product.prdid}
+              product={{ ...item.product, prdid: item.product.prdid.toString() }}
+              quantity={item.quantity}
+              onUpdateQuantity={updateQuantity}
+              onRemove={removeFromCart}
+            />
           ))}
-          <div className="flex justify-between font-bold text-lg">
-            <span>Total</span>
-            <Currency value={total} />
-          </div>
         </div>
-        {!isOrderPlaced ? (
-          <Button onClick={handlePlaceOrder} className="bg-green-500 text-white">
-            Confirmar Pedido
-          </Button>
-        ) : (
-          <p>Pedido confirmado. Gracias por tu compra.</p>
-        )}
+
+        <div className="flex justify-between font-bold text-lg">
+          <span>Total</span>
+          <span>${total.toFixed(2)}</span>
+        </div>
+
+        <div className="flex justify-between items-center">
+        <Button
+          onClick={handlePlaceOrder}
+          className="bg-greenButtonValle2 hover:bg-green-600 text-white px-4 py-2"
+        >
+          Confirmar Pedido
+        </Button>
+        <Button
+          onClick={handleCancelOrder}
+          className="bg-redButtonValle text-white hover:bg-red-600 px-4 py-2"
+        >
+          Cancelar Pedido
+        </Button>
+      </div>
+
       </div>
     </div>
   );

@@ -24,6 +24,18 @@ export default {
         greenButtonValle: {
           DEFAULT: "rgba(112, 153, 77, 0.42)", // Color principal
         },
+        yellowButtonValle: {
+          DEFAULT: "rgba(226, 185, 0, 1)", // Color principal
+        },
+        redButtonValle: {
+          DEFAULT: "rgba(197, 60, 60, 1)", // Color principal
+        },
+        grayValle: {
+          DEFAULT: "rgba(212, 212, 212, 1)", // Color principal
+        },
+        greenButtonValle2: {
+          DEFAULT: "rgba(112, 153, 77, 1)", // Color principal
+        },
       },
     },
   },
