@@ -61,15 +61,23 @@ const TipoPage: React.FC<TipoPageProps> = ({ params }) => {
     <div className="bg-white">
       <Container>
         <div className="px-4 py-10 sm:px-6 lg:px-8">
+          {/* Título de la tienda*/}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-greenValle">Bienvenido a nuestra tienda!</h1>
+            <p className="mt-4 text-gray-700">
+              Cada producto de Valle de Gigantes no solo es delicioso, sino también un aporte directo al
+              desarrollo sostenible de nuestras comunidades.
+            </p>
+          </div>
           {/* Título del tipo */}
-          <h1 className="text-3xl font-bold mb-6">{tipo?.tipnombre || "Productos"}</h1>
+          <h1 className="text-3xl font-bold mb-6 text-greenValle">{tipo?.tipnombre || "Productos"}</h1>
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Filtros */}
             <Filters producers={producers} onFilter={handleFilter} />
 
             {/* Lista de Productos */}
             <div className="lg:col-span-3">
-              <ProductList title="Productos" items={filteredProducts} />
+              <ProductList title="Todos los productos Productos" items={filteredProducts} />
             </div>
           </div>
         </div>

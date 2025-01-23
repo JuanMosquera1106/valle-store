@@ -17,14 +17,14 @@ const Filters: React.FC<FiltersProps> = ({ producers, onFilter }) => {
   };
 
   return (
-    <div className="p-4 border rounded-md">
-      <h3 className="font-bold text-lg mb-4">Filtros</h3>
+    <div className="p-4 border rounded-md border-white">
+      <h3 className="font-bold text-lg mb-2">Filtros</h3>
       
       {/* Filtro por Productor */}
       <div className="mb-4">
-        <label className="block font-medium mb-2">Productor</label>
+        <label className="block font-bold mb-2">Productor</label>
         <select
-          className="w-full border rounded-md p-2"
+          className="w-full border rounded-md p-2 bg-greenButtonValle"
           value={selectedProducer || ""}
           onChange={(e) => setSelectedProducer(e.target.value || undefined)}
         >
@@ -39,20 +39,20 @@ const Filters: React.FC<FiltersProps> = ({ producers, onFilter }) => {
 
       {/* Filtro por Precio */}
       <div className="mb-4">
-        <label className="block font-medium mb-2">Precio Mínimo</label>
+        <label className="block font-bold mb-2">Precio Mínimo</label>
         <input
           type="number"
-          className="w-full border rounded-md p-2"
+          className="w-full border rounded-md p-2 bg-greenButtonValle"
           placeholder="Ej: 100"
           value={minPrice || ""}
           onChange={(e) => setMinPrice(e.target.value ? Number(e.target.value) : undefined)}
         />
       </div>
       <div className="mb-4">
-        <label className="block font-medium mb-2">Precio Máximo</label>
+        <label className="block font-bold mb-2">Precio Máximo</label>
         <input
           type="number"
-          className="w-full border rounded-md p-2"
+          className="w-full border rounded-md p-2 bg-greenButtonValle"
           placeholder="Ej: 500"
           value={maxPrice || ""}
           onChange={(e) => setMaxPrice(e.target.value ? Number(e.target.value) : undefined)}
@@ -62,7 +62,7 @@ const Filters: React.FC<FiltersProps> = ({ producers, onFilter }) => {
       {/* Botón para Aplicar Filtros */}
       <button
         onClick={applyFilters}
-        className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition"
+        className="w-full bg-black text-white py-2 rounded-md hover:bg-greenButtonValle transition bg-greenValle"
       >
         Aplicar Filtros
       </button>
