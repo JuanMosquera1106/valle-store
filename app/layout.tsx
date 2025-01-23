@@ -28,7 +28,7 @@ export default function RootLayout({
         </div>
 
         {/* Contenido principal */}
-        <main className="flex-1 pt-[70px] pb-[70px]">
+        <main className="flex-1 pt-[50px] pb-[50px]">
           {children}
         </main>
 
