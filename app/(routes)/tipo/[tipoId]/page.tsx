@@ -77,7 +77,7 @@ const TipoPage: React.FC<TipoPageProps> = ({ params }) => {
 
             {/* Lista de Productos */}
             <div className="lg:col-span-3">
-              <ProductList title="Todos los productos Productos" items={filteredProducts} />
+              <ProductList title="Todos los productos" items={filteredProducts} />
             </div>
           </div>
         </div>

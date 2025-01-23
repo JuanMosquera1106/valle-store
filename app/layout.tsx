@@ -22,9 +22,20 @@ export default function RootLayout({
       <body
         className={font.className}
       >
-        <Navbar/>
-        {children}
-        <Footer/>
+        {/* Navbar fijo */}
+        <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+          <Navbar />
+        </div>
+
+        {/* Contenido principal */}
+        <main className="flex-1 pt-[70px] pb-[70px]">
+          {children}
+        </main>
+
+        {/* Footer fijo */}
+        <div className="fixed bottom-0 left-0 w-full z-50 bg-white shadow-md">
+          <Footer />
+        </div>
       </body>
     </html>
   );

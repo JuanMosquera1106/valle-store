@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["i.pinimg.com", "www.google.com", "via.placeholder.com", "puceeduec-my.sharepoint.com"], // Añade aquí los dominios permitidos para las imágenes
+    domains: ["i.pinimg.com", "www.google.com", "via.placeholder.com", "drive.google.com", "github.com"], // Añade aquí los dominios permitidos para las imágenes
   },
   /* otras opciones de configuración */
 };

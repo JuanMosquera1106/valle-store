@@ -32,7 +32,7 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
 
             {/* Enlace adicional a "Inicio" */}
       <Link
-          href="/"
+          href="/#inicio"
           className={cn(
             "text-sm font-medium transition-colors hover:text-primary",
             pathname === "/inicio" ? "text-black font-bold underline" : "text-greenValle"
@@ -54,7 +54,7 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
 
       {/* Enlace adicional a "Nosotros" */}
       <Link
-        href="/info"
+        href="/#Nosotros"
         className={cn(
           "text-sm font-medium transition-colors hover:text-primary",
           pathname === "/info" ? "text-greenValle font-bold underline" : "text-greenValle"

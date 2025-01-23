@@ -13,6 +13,7 @@ interface CartState {
   removeFromCart: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
   clearCart: () => void;
+  calculateTotalQuantity: () => void; // Nueva función para sincronizar la cantidad
 }
 
 // Función para sincronizar con localStorage
@@ -27,7 +28,19 @@ const loadCart = (): CartItem[] => {
 
 const useCartStore = create<CartState>((set) => ({
   items: loadCart(),
-  totalQuantity: 0, // Inicializa la cantidad total
+  totalQuantity: loadCart().reduce(
+    (total, item) => total + item.quantity,
+    0
+  ), // Inicializa la cantidad total desde localStorage
+
+  calculateTotalQuantity: () => {
+    set((state) => ({
+      totalQuantity: state.items.reduce(
+        (total, item) => total + item.quantity,
+        0
+      ),
+    }));
+  },
 
   addToCart: (product, quantity = 1) => {
     set((state) => {
