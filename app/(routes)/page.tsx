@@ -177,7 +177,7 @@ const HomePage = async () => {
                             <div className="p-1">
                             <Card>
                                 <CardContent className="flex aspect-square items-center justify-center p-6">
-                                <span className="text-2xl font-semibold">{index + 1}</span>
+                                <Image src={"https://github.com/JuanMosquera1106/valle-store/blob/imagenes/PHOTO-2022-02-17-11-09-49%20copy.jpg?raw=true"} alt={""}></Image>
                                 </CardContent>
                             </Card>
                             </div>
