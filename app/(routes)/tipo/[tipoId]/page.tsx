@@ -70,8 +70,8 @@ const TipoPage: React.FC<TipoPageProps> = ({ params }) => {
             </p>
           </div>
           {/* Título del tipo */}
-          <h1 className="text-3xl font-bold mb-6 text-greenValle">{tipo?.tipnombre || "Productos"}</h1>
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <h1 className="text-3xl font-bold mb-2 text-greenValle">{tipo?.tipnombre || "Productos"}</h1>
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Filtros */}
             <Filters producers={producers} onFilter={handleFilter} />
 

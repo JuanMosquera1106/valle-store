@@ -163,20 +163,20 @@ const TransferPage = () => {
           <span>${total.toFixed(2)}</span>
         </div>
 
-        <div className="flex justify-between items-center">
-        <Button
-          onClick={handlePlaceOrder}
-          className="bg-greenButtonValle2 hover:bg-green-600 text-white px-4 py-2"
-        >
-          Confirmar Pedido
-        </Button>
-        <Button
-          onClick={handleCancelOrder}
-          className="bg-redButtonValle text-white hover:bg-red-600 px-4 py-2"
-        >
-          Cancelar Pedido
-        </Button>
-      </div>
+        <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-4 mt-6">
+          <Button
+            onClick={handlePlaceOrder}
+            className="bg-greenButtonValle2 hover:bg-green-600 text-white px-4 py-2 w-full sm:w-auto"
+          >
+            Confirmar Pedido
+          </Button>
+          <Button
+            onClick={handleCancelOrder}
+            className="bg-redButtonValle text-white hover:bg-red-600 px-4 py-2 w-full sm:w-auto"
+          >
+            Cancelar Pedido
+          </Button>
+        </div>
 
       </div>
     </div>

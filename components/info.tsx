@@ -53,7 +53,7 @@ const handleAddToCartClick = (e: React.MouseEvent) => {
           
         {/* Botón de compra */}
         <div className="mt-6">
-            <Button onClick={handleAddToCartClick} className="flex items-center gap-x-2">
+            <Button onClick={handleAddToCartClick} className="flex items-center gap-x-2 bg-greenValle text-white">
                 Agregar al carrito
                 <ShoppingCart />
             </Button>

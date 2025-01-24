@@ -23,10 +23,10 @@ const CartItem: React.FC<CartItemProps> = ({
   onRemove,
 }) => {
   return (
-    <div className="flex justify-between items-center border-b-2 py-4 border-greenValle">
+    <div className="flex flex-col sm:flex-row items-center border-b-2 py-6 border-greenValle gap-6 sm:gap-8">
       {/* Información del producto */}
       <div className="flex items-center space-x-4">
-        <div className="relative w-16 h-16">
+        <div className="relative w-16 h-16 flex-shrink-0">
           <Image
             src={product.prdfoto}
             alt={product.prdnombre}
@@ -34,14 +34,14 @@ const CartItem: React.FC<CartItemProps> = ({
             className="rounded-md object-cover"
           />
         </div>
-        <div>
+        <div className="text-center sm:text-left">
           <h2 className="text-lg font-medium">{product.prdnombre}</h2>
           <Currency value={product.prdprecio} />
         </div>
       </div>
 
       {/* Contador de cantidad */}
-      <div className="flex items-center space-x-4">
+      <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4">
         <div className="flex items-center">
           <button
             onClick={() => onUpdateQuantity(product.prdid, quantity + 1)}
@@ -61,12 +61,14 @@ const CartItem: React.FC<CartItemProps> = ({
       </div>
 
       {/* Botón de eliminar */}
-      <Button
-        onClick={() => onRemove(product.prdid)}
-        className="bg-redButtonValle text-white hover:bg-red-600"
-      >
-        Eliminar
-      </Button>
+      <div className="w-full sm:w-auto flex justify-center">
+        <Button
+          onClick={() => onRemove(product.prdid)}
+          className="bg-redButtonValle text-white hover:bg-red-600 w-full sm:w-auto"
+        >
+          Eliminar
+        </Button>
+      </div>
     </div>
   );
 };

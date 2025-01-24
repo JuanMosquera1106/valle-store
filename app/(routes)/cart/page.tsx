@@ -37,11 +37,15 @@ const CartPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6 text-greenValle">Carrito</h1>
+    <div className="container mx-auto p-4 sm:p-6">
+      <h1 className="text-2xl font-bold mb-6 text-greenValle text-center sm:text-left">
+        Carrito
+      </h1>
 
       {items.length === 0 ? (
-        <p className="text-gray-500">Tu carrito está vacío.</p>
+        <p className="text-gray-500 text-center sm:text-left">
+          Tu carrito está vacío.
+        </p>
       ) : (
         <div className="space-y-6">
           {/* Detalles del carrito */}
@@ -53,15 +57,15 @@ const CartPage = () => {
           />
 
           {/* Botones de acciones */}
-          <div className="mt-6 flex justify-between items-center">
+          <div className="mt-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4">
             <Button
-              className="text-white hover:bg-gray-800 bg-yellowButtonValle"
+              className="w-full sm:w-auto text-white hover:bg-gray-800 bg-yellowButtonValle"
               onClick={handleCheckout}
             >
               Proceder al Pago
             </Button>
             <Button
-              className="bg-redButtonValle text-white hover:bg-red-600"
+              className="w-full sm:w-auto bg-redButtonValle text-white hover:bg-red-600"
               onClick={clearCart}
             >
               Vaciar Carrito

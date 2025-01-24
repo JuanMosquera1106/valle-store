@@ -61,9 +61,14 @@ const RegisterClientForm: React.FC<RegisterClientFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2 w-80 justify-start">
-      <h1 className="font-bold text-[24px]">
-      Datos del cliente</h1>
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 w-full max-w-[90%] lg:max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md"
+    >
+      <h1 className="font-bold text-2xl text-center text-greenValle mb-4">
+        Datos del Cliente
+      </h1>
+
       <input
         type="text"
         name="clinombre"
@@ -73,7 +78,7 @@ const RegisterClientForm: React.FC<RegisterClientFormProps> = ({
         className="w-full p-2 border rounded-md bg-grayValle"
         required
       />
-      <br/>
+
       <input
         type="email"
         name="clicorreo"
@@ -83,7 +88,7 @@ const RegisterClientForm: React.FC<RegisterClientFormProps> = ({
         className="w-full p-2 border rounded-md bg-grayValle"
         required
       />
-      <br/>
+
       <input
         type="text"
         name="clitelefono"
@@ -92,7 +97,7 @@ const RegisterClientForm: React.FC<RegisterClientFormProps> = ({
         onChange={handleChange}
         className="w-full p-2 border rounded-md bg-grayValle"
       />
-      <br/>
+
       <input
         type="text"
         name="clici"
@@ -101,10 +106,10 @@ const RegisterClientForm: React.FC<RegisterClientFormProps> = ({
         onChange={handleChange}
         className="w-full p-2 border rounded-md bg-grayValle"
       />
-      <br/>
+
       <button
         type="submit"
-        className="w-full bg-yellowButtonValle text-white py-2 rounded-md"
+        className="w-full bg-yellowButtonValle text-white py-2 rounded-md hover:bg-yellow-600 transition"
       >
         {initialData ? "Actualizar Cliente" : "Registrar Cliente"}
       </button>

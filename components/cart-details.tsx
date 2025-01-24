@@ -25,9 +25,9 @@ const CartDetails: React.FC<CartDetailsProps> = ({
   total,
 }) => {
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Lista de productos */}
-      <div>
+      <div className="space-y-4">
         {items.map((item) => (
           <CartItem
             key={item.product.prdid}
@@ -40,15 +40,17 @@ const CartDetails: React.FC<CartDetailsProps> = ({
       </div>
 
       {/* Resumen de costos */}
-      <div className="mt-6 space-y-4">
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-medium">Costo de envío</h2>
-          <p className="text-gray-500">
+      <div className="mt-6 space-y-6 border-t pt-6">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <h2 className="text-lg font-medium text-center sm:text-left">
+            Costo de envío
+          </h2>
+          <p className="text-gray-500 text-center sm:text-right">
             El valor del transporte depende de las tarifas del transportista.
           </p>
         </div>
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-medium">Total</h2>
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <h2 className="text-lg font-medium text-center sm:text-left">Total</h2>
           <Currency value={total} />
         </div>
       </div>
